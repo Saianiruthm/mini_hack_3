@@ -42,7 +42,6 @@ plt.title('Trends in Happiness Scores Over Time')
 plt.xlabel('Year')
 plt.ylabel('Happiness Score')
 plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
-plt.tight_layout()
 plt.show()
 
 # Correlation Analysis: Determine relationships between happiness scores and other variables
@@ -62,13 +61,12 @@ for i, factor in enumerate(factors, 1):
     plt.title(f'Happiness Score vs {factor}')
     plt.xlabel(factor)
     plt.ylabel('Happiness Score')
-plt.tight_layout()
 plt.show()
 
 avg_happiness_by_region = df.groupby('Region')['Happiness Score'].mean().sort_values(ascending=False)
 
 plt.figure(figsize=(12, 8))
-sns.barplot(x=avg_happiness_by_region.values, y=avg_happiness_by_region.index, palette='viridis')
+sns.barplot(x=avg_happiness_by_region.values, y=avg_happiness_by_region.index, hue = avg_happiness_by_region.index , legend = False, palette='viridis')
 plt.title('Average Happiness Score by Region')
 plt.xlabel('Average Happiness Score')
 plt.ylabel('Region')
@@ -81,22 +79,3 @@ plt.title('Happiness Score vs Trust in Government')
 plt.xlabel('Trust in Government')
 plt.ylabel('Happiness Score')
 plt.show()
-
-# Regional variation in Trust in Government
-plt.figure(figsize=(12, 8))
-sns.boxplot(data=df, x='Region', y='Perceptions of corruption', palette='viridis')
-plt.title('Trust in Government Across Regions')
-plt.xticks(rotation=90)
-plt.xlabel('Region')
-plt.ylabel('Trust in Government')
-plt.show()
-
-demographic_factors = ['age', 'gender', 'education_level']
-for factor in demographic_factors:
-    plt.figure(figsize=(8, 6))
-    sns.boxplot(data=df, x=factor, y='happiness_score')
-    plt.title(f'Happiness Score by {factor.capitalize()}')
-    plt.xlabel(factor.capitalize())
-    plt.ylabel('Happiness Score')
-    plt.show()
-
